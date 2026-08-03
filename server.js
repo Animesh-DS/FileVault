@@ -11,14 +11,17 @@ require('../config/dbConnection.js')
 
 app.use(express.json())
 
+//enable cors
 app.use(cors({origin:'http://localhost:3500'}));
 
+//generate the pre signed url
 app.get("/api/sign",(req,res)=>{
 
     const output = SigGen();
     res.json(output)
 })
 
+//add new user
 app.use("/api/addFile",addFileRouter);
 
 app.listen(8000,()=>{
