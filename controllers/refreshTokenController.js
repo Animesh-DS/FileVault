@@ -29,8 +29,8 @@ const refreshToken = async (req,res) => {
         res.json({accessToken});
     } catch (err) {
         console.log("refresh token verification error");
-        return res.status(500).json({message:"refreshing access token failed"})
+        return res.status(500).json({message:"refreshing access token failed"});
     }
-    
-
 }
+
+module.exports = {refreshToken};
