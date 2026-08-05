@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
-require('../config/dbConnection.js') //Make the connection link
+require('./config/dbConnection.js') //Make the connection link
 
 const app = express();
 

@@ -7,10 +7,15 @@ const verifyJWT = (req,res,next) => {
     const token = auth_header.split(' ')[1];
 
     jwt.verify(token,process.env.ACESS_TOKEN_SECRET,(err,decoded)=>{
-        if(err) return res.sendStatus(403); //invalid token
+        if(err){ 
+            //invalid token
+            console.log(err.message);
+            return res.sendStatus(403);
+
+        } 
         req.username = decoded.username;
         next()
     })
 }
 
-module.exports = verifyJWT;
+module.exports = {verifyJWT};

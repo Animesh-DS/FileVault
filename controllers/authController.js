@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const { Query } = require('pg');
 require('dotenv').config();
 const bcrypt = require('bcrypt');
-const {pool} = require('../config/dbConnection.js');
+const pool = require('../config/dbConnection.js');
 
 const AuthUser = async (req,res) => {
     const {username,password} = req.body;
@@ -51,7 +51,7 @@ const AuthUser = async (req,res) => {
         res.json({accessToken});
 
     } catch (err) {
-        console.log(err);
+        console.log(err.message);
         return res.status(500).json({message:"Authentication Error"})
     }
 }
@@ -64,7 +64,7 @@ const refreshToken = async (req,res) => {
         const decoded = jwt.verify(cookie_token,process.env.REFREST_TOKEN_SECRET);
 
         const query = 'Select * from "UserList" where "username" = $1';
-        const result = await pool.query(query,[username]);
+        const result = await pool.query(query,[decoded.username]);
 
         if(result.rowCount === 0){
             return res.status(404).json({message:"User not found in database"});
@@ -83,7 +83,7 @@ const refreshToken = async (req,res) => {
 
         res.json({accessToken});
     } catch (err) {
-        console.log("refresh token verification error");
+        console.log("refresh token verification error",err.message);
         return res.status(500).json({message:"refreshing access token failed"});
     }
 }

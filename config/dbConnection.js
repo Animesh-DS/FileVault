@@ -1,5 +1,5 @@
 require('dotenv').config();
-const {Pool} = require('pg');w
+const {Pool} = require('pg');
 
 const pool = new Pool({
     host:process.env.POSTGRESQL_HOST,

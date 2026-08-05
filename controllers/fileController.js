@@ -17,7 +17,7 @@ const addFile = async (req,res)=>{
         const decoded = jwt.verify(token,process.env.ACESS_TOKEN_SECRET)
         uuid = decoded.id;
     } catch (err) {
-        console.log(err);
+        console.log(err.message);
         return res.status(403).json({message:"jwt verify failed!"});
     }
         
@@ -28,7 +28,7 @@ const addFile = async (req,res)=>{
         return res.status(200).json({message:"url added to db"});
     }
     catch (err) {
-        console.log(err);
+        console.log(err.message);
         return res.status(500).json({message:"url insertion in db failed"})
     }
     
