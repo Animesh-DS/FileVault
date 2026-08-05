@@ -12,32 +12,13 @@ Core Achievements
 The Direct Upload Architecture
 -----------------------------------------------------------------------------------------------
 
-+---------+              +-------------------+              +------------+
-| Client  |              |  Node.js Backend  |              | Cloudinary |
-+----+----+              +---------+---------+              +-----+------+
-     |                             |                              |
-     |  1. POST /auth/login        |                              |
-     +---------------------------->|                              |
-     |<----------------------------+                              |
-     |     Returns Access Token    |                              |
-     |                             |                              |
-     |  2. GET /files/sign (JWT)   |                              |
-     +---------------------------->|                              |
-     |<----------------------------+                              |
-     |     Returns Signature,      |                              |
-     |     Timestamp & API Key     |                              |
-     |                             |                              |
-     |  3. POST FormData (File + Sig + API Key)                   |
-     +----------------------------------------------------------->|
-     |<-----------------------------------------------------------+
-     |     Returns Public Image URL                               |
-     |                             |                              |
-     |  4. POST /files/upload      |                              |
-     |     { imgURL: "..." } (JWT) |                              |
-     +---------------------------->|                              |
-     |                             |-- Save URL to PostgreSQL     |
-     |<----------------------------+                              |
-     |     Returns Success         |                              |
+- Auth Architecture
+
+![Logo](assets/authFlow.png)
+
+- Uplaod Architecture
+
+![Logo](assets/uploadFlow.png)
 
 
 -----------------------------------------------------------------------------------------------
