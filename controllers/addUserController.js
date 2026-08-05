@@ -5,9 +5,9 @@ const pool = require('../config/dbConnection.js');
 const saltRounds=10;
 
 const AddUser = async (req,res) => {
-    const {name, password} = req.body;
+    const {username, password} = req.body;
     
-    if(!name||!password) return res.status(400).json({message:"Username and Password are required"});    
+    if(!username||!password) return res.status(400).json({message:"Username and Password are required"});    
 
     let hashpwd;
     let currID;
@@ -27,7 +27,7 @@ const AddUser = async (req,res) => {
     try {
         //add to database table "UserList"
         const query = 'Insert into "UserList" ("uuid","username","password") Values($1,$2,$3) ON CONFLICT ("username")  DO NOTHING;';
-        const queryResult = await pool.query(query,[currID,name,hashpwd]);
+        const queryResult = await pool.query(query,[currID,username,hashpwd]);
 
         //duplicary check
         if(queryResult.rowCount === 0){
